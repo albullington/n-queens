@@ -79,24 +79,30 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      console.log(this);
-      // console.log(this.attributes[rowIndex]);
-      // console.log(this.attributes[rowIndex].includes(1))
-      // console.log(this.initialize);
-      // console.log(params)
-      // if(this.attributes[rowIndex].includes(1)){
-      //   return true;
-      // }
-      return false; // fixme
+      var currentRow = this.get(rowIndex);
+      var conflict = 0;
+
+      for(var i = 0; i < currentRow.length; i++){
+        if(currentRow[i] ===  1){
+          conflict ++;
+        }
+      }
+      if(conflict > 1){
+        return true;
+      } else {
+        return false;
+      }
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      console.log(this)
-      if(this.hasRowConflictAt){
-        return true;
+      
+      for(var key in this.attributes){
+        if(this.hasRowConflictAt(key)){
+          return true;
+        }
       }
-      return false; // fixme
+      return false; 
     },
 
 
@@ -106,16 +112,32 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      //console.log(this);
-      return false; // fixme
+      var conflict = 0;
+    
+      for(var key in this.attributes){
+        if(this.attributes[key][colIndex] === 1){
+          conflict ++;
+        }
+      }
+ 
+      if(conflict > 1){
+        return true;
+      } else {
+        return false;
+      }
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      // if(this.hasColConflictAt){
-      //   return true;
-      // }
-      return false; // fixme
+      for(var i = 0; i < Object.keys(this.attributes).length; i++){
+        for(var key in this.attributes){
+          if(this.hasColConflictAt(key[i])){
+            return true;
+          }
+        }
+      }
+   
+      return false; 
     },
 
 
