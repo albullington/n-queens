@@ -147,12 +147,39 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+
+      //all keys (rows) start at 0;
+      //all keys increment to 1, then 2, then 3, then 4...
+      //column index is starting value
+      //for every row, add one to column index
+      
+      var xIndex = majorDiagonalColumnIndexAtFirstRow;
+      var rows = this.rows();
+      var conflict = 0;
+    
+      for(var i = 0; i < rows.length; i++){
+        if(rows[i][i+xIndex] === 1){
+              conflict++;
+            }
+        }
+      
+      if(conflict > 1){
+        return true;  
+      }
+      
+      return false;
     },
+
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var size = this.get('n'); 
+      for (var i = 1 - size; i < size; i++) {
+        if(this.hasMajorDiagonalConflictAt(i)){
+          return true;
+        } 
+      }
+      return false;
     },
 
 
