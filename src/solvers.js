@@ -17,7 +17,24 @@
 
 window.findNRooksSolution = function(n) {
   var solution = undefined; //fixme
+  // get the boards by using n (matrix)
+  var matrix = new Board({n:n});
+  var rows = matrix.rows(n);
+  
+  // check rows by iterating through each rows 
+  matrix.togglePiece(0,0);
+  for(var i = 1; i < rows.length; i ++){
+    // check if theres any rock conflicts 
+    // if there's conflict, skip to the next row
+    if(matrix.hasAnyRooksConflicts()){
+      continue;
+    }
+    // if there's no conflict, pick one index, and toggle (one rock per one index)
+    matrix.togglePiece(i, i);
+  }
 
+  // return a matrix as a solution 
+  solution = rows;
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution;
 };

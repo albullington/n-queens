@@ -156,9 +156,8 @@
       var xIndex = majorDiagonalColumnIndexAtFirstRow;
       var rows = this.rows();
       var conflict = 0;
-    
-      for(var i = 0; i < rows.length; i++){
-        if(rows[i][i+xIndex] === 1){
+      for(var y = 0; y < rows.length; y++){
+        if(rows[y][y+xIndex] === 1){
               conflict++;
             }
         }
@@ -193,7 +192,6 @@
       var xIndexCopy = xIndex;
       var rows = this.rows();
       var conflict = 0;
-    
       for(var i = 0; i < rows.length; i++){
         if(rows[i][xIndexCopy] === 1){
               conflict++;
